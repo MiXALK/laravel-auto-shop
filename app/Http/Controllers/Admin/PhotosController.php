@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use App\models\admin\Photo;
+use App\Models\Admin\Photos;
 
 class PhotosController extends Controller
 {
@@ -16,7 +16,10 @@ class PhotosController extends Controller
      */
     public function index()
     {
-        //
+        $photos = Photos::all();
+        return view('admin.photos.index', [
+            'photos' => $photos,
+        ]);
     }
 
     /**
@@ -26,7 +29,8 @@ class PhotosController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.photos.make');
+
     }
 
     /**
@@ -37,7 +41,14 @@ class PhotosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'alt' => 'required',
+            'title' => 'required',
+            'path' => 'required',
+        ]);
+        Photos::create($request->all());
+        return redirect('/admin/photos');
     }
 
     /**
@@ -48,7 +59,10 @@ class PhotosController extends Controller
      */
     public function show($id)
     {
-        //
+        $photos = Photos::getItem($id);
+        return view('admin.photos.photo', [
+            'photos' => $photos,
+        ]);
     }
 
     /**
@@ -59,7 +73,10 @@ class PhotosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $photos = Photos::getItem($id);
+        return view('admin.photos.edit', [
+            'photos' => $photos,
+        ]);
     }
 
     /**
@@ -71,7 +88,22 @@ class PhotosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'alt' => 'required',
+            'title' => 'required',
+            'path' => 'required',
+        ]);
+
+
+        Photos::where("id", $id)->update([
+            "name" => $request->name,
+            "alt" => $request->alt,
+            "title" => $request->title,
+            "path" => $request->path,
+        ]);
+
+        return redirect('/admin/photos/'.$request->id);
     }
 
     /**
@@ -82,6 +114,8 @@ class PhotosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photos::find($id);
+        $photo->delete();
+        return redirect('/admin/photos');
     }
 }

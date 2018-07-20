@@ -11,8 +11,8 @@ class Good extends Model
 
     protected $fillable = ['name', 'short_description', 'description', 'icon'];
 
-    public static function getItem(){
-        return static :: where ('id', 2 )->get();
+    public static function getItem($id){
+        return static :: where ('id', $id )->get();
     }
 
 }

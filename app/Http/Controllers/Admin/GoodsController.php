@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use App\models\admin\Good;
+use App\Models\Admin\Goods;
 
 class GoodsController extends Controller
 {
@@ -16,7 +16,10 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        //
+        $goods = Goods::all();
+        return view('admin.goods.index', [
+            'goods' => $goods,
+        ]);
     }
 
     /**
@@ -26,7 +29,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.goods.make');
     }
 
     /**
@@ -37,7 +40,14 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
+            'icon' => 'required',
+        ]);
+        Goods::create($request->all());
+        return redirect('/admin');
     }
 
     /**
@@ -48,7 +58,10 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $good = Goods::getItem($id);
+        return view('admin.goods.good', [
+            'goods' => $good,
+        ]);
     }
 
     /**
@@ -59,7 +72,10 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $good = Goods::getItem($id);
+        return view('admin.goods.edit', [
+            'goods' => $good,
+        ]);
     }
 
     /**
@@ -71,7 +87,23 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'short_description' => 'required',
+            'description' => 'required',
+            'icon' => 'required',
+        ]);
+
+
+        Goods::where("id", $id)->update([
+            "name" => $request->name,
+            "short_description" => $request->short_description,
+            "description" => $request->description,
+            "icon" => $request->icon,
+        ]);
+
+        return redirect('/admin/goods/'.$request->id);
+
     }
 
     /**
@@ -82,6 +114,9 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $good = Goods::find($id);
+        $good->delete();
+        return redirect('/admin');
+
     }
 }

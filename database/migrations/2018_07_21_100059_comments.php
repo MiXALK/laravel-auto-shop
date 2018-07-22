@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GoodsPhotos extends Migration
+class Comments extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,13 @@ class GoodsPhotos extends Migration
      */
     public function up()
     {
-        Schema::create('goodsPhotos', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
+            $table->integer('id', true);
+            $table->string('text');
             $table->integer('goods_id');
 
             $table->foreign('goods_id')
                 ->references('id')->on('goods')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-
-            $table->integer('photos_id');
-
-            $table->foreign('photos_id')
-                ->references('id')->on('photos')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -38,6 +32,6 @@ class GoodsPhotos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goodsPhotos');
+        //
     }
 }

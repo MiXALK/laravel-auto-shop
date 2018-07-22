@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GoodsRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
+use App\Comments;
+
 
 class GoodsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -38,16 +43,11 @@ class GoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GoodsRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'short_description' => 'required',
-            'description' => 'required',
-            'icon' => 'required',
-        ]);
+        $request->rules();
         Goods::create($request->all());
-        return redirect('/admin');
+        return redirect()->route('goods.index');
     }
 
     /**
@@ -58,7 +58,7 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
-        $good = Goods::getItem($id);
+        $good = Goods::find($id);
         return view('admin.goods.good', [
             'goods' => $good,
         ]);
@@ -72,7 +72,7 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        $good = Goods::getItem($id);
+        $good = Goods::find($id);
         return view('admin.goods.edit', [
             'goods' => $good,
         ]);
@@ -85,24 +85,19 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GoodsRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'short_description' => 'required',
-            'description' => 'required',
-            'icon' => 'required',
-        ]);
+        //блок заменен строчкой ниже
+//        $this->validate($request, [
+//            'name' => 'required',
+//            'short_description' => 'required',
+//            'description' => 'required',
+//            'icon' => 'required',
+//        ]);
 
-
-        Goods::where("id", $id)->update([
-            "name" => $request->name,
-            "short_description" => $request->short_description,
-            "description" => $request->description,
-            "icon" => $request->icon,
-        ]);
-
-        return redirect('/admin/goods/'.$request->id);
+        $request->rules();
+        Goods::find($id)->update($request->all());
+        return back();
 
     }
 
@@ -116,7 +111,14 @@ class GoodsController extends Controller
     {
         $good = Goods::find($id);
         $good->delete();
-        return redirect('/admin');
+        return redirect()->route('goods.index');
+
+    }
+
+    public function view()
+    {
+        return $this->view('admin.goods.view', [
+        ]);
 
     }
 }

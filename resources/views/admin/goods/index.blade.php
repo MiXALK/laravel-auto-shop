@@ -5,7 +5,7 @@
         <div class="x_panel">
             <div class="x_title">
                 <h2>Goods</h2>
-                <a href="/admin/goods/create"><button type="button" class="btn btn-success navbar-right">Add new good</button></a>
+                <a href="{{route('goods.create')}}"><button type="button" class="btn btn-success navbar-right">Add new good</button></a>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -28,8 +28,8 @@
                                 <td>{{$good->description}}</td>
                                 <td>{{$good->icon}}</td>
                                 <td class="last">
-                                    <a href="/admin/goods/{{$good->id}}"><button class="btn btn-default" type="button">View</button></a><br>
-                                    <a href="/admin/goods/edit/{{$good->id}}"><button class="btn btn-primary" type="button">Edit</button></a><br>
+                                    <a href="{{route('goods.show', $good->id)}}"><button class="btn btn-default" type="button">View</button></a><br>
+                                    <a href="{{route('goods.edit', $good->id)}}"><button class="btn btn-primary" type="button">Edit</button></a><br>
                                     <form action="/admin/goods/{{ $good->id }}" method="post">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}

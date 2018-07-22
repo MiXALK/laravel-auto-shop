@@ -30,20 +30,28 @@ Route::get('/photos', 'PhotoController@index')->name('photo');
 Route::get('/photos/create', 'PhotoController@create');
 Route::get('/photos/($id)', 'PhotoController@view')->name('photo');
 
-// admin goods
-Route::get('/admin', 'Admin\GoodsController@index');
-Route::get('/admin/goods/create', 'Admin\GoodsController@create');
-Route::get('/admin/goods/{id}', 'Admin\GoodsController@show');
-Route::get('/admin/goods/edit/{id}', 'Admin\GoodsController@edit');
-Route::post('/admin/goods', 'Admin\GoodsController@store');
-Route::patch('/admin/goods/{id}', 'Admin\GoodsController@update')->name('goods.update');
-Route::delete('/admin/goods/{id}', 'Admin\GoodsController@destroy')->name('goods.destroy');
 
-// admin photos
-Route::get('/admin/photos', 'Admin\PhotosController@index');
-Route::get('/admin/photos/create', 'Admin\PhotosController@create');
-Route::get('/admin/photos/{id}', 'Admin\PhotosController@show');
-Route::get('/admin/photos/edit/{id}', 'Admin\PhotosController@edit');
-Route::post('/admin/photos', 'Admin\PhotosController@store');
-Route::patch('/admin/photos/{id}', 'Admin\PhotosController@update')->name('photos.update');
-Route::delete('/admin/photos/{id}', 'Admin\PhotosController@destroy')->name('photos.destroy');
+Route::prefix('admin')->middleware(['auth'])->group(function(){
+    // admin goods
+    Route::get('/goods', 'Admin\GoodsController@index')->name('goods.index');
+    Route::get('/goods/create', 'Admin\GoodsController@create')->name('goods.create');
+    Route::get('/goods/{id}', 'Admin\GoodsController@show')->name('goods.show');
+    Route::get('/goods/edit/{id}', 'Admin\GoodsController@edit')->name('goods.edit');
+    Route::post('/goods', 'Admin\GoodsController@store');
+    Route::patch('/goods/{id}', 'Admin\GoodsController@update');
+    Route::delete('/goods/{id}', 'Admin\GoodsController@destroy');
+
+    // admin photos
+    Route::get('/photos', 'Admin\PhotosController@index')->name('photos.index');
+    Route::get('/photos/create', 'Admin\PhotosController@create')->name('photos.create');
+    Route::get('/photos/{id}', 'Admin\PhotosController@show')->name('photos.show');
+    Route::get('/photos/edit/{id}', 'Admin\PhotosController@edit')->name('photos.edit');
+    Route::post('/photos', 'Admin\PhotosController@store');
+    Route::patch('/photos/{id}', 'Admin\PhotosController@update');
+    Route::delete('/photos/{id}', 'Admin\PhotosController@destroy');
+});
+
+Route::get('/comment', 'Admin\GoodsController@view');
+
+Route::post('/admin/goods/{id}/comments', 'CommentsController@store');
+

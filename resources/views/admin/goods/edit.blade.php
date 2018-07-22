@@ -7,50 +7,48 @@
                 <div class="x_panel">
                     <div class="x_content">
                         @if(count($goods))
-                            @foreach($goods as $good)
 
-                        <form class="form-horizontal form-label-left" novalidate action="/admin/goods/{{$good->id}}" method="post">
+                        <form class="form-horizontal form-label-left" novalidate action="/admin/goods/{{$goods->id}}" method="post">
                             {{ csrf_field() }}
                             @method('PATCH')
-                            <span class="section">Edit {{$good->name}}</span>
+                            <span class="section">Edit {{$goods->name}}</span>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name item <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="" required="required" type="text" value="{{$good->name}}">
+                                    <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="" required="required" type="text" value="{{$goods->name}}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="short_description">Short Description <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="short_description" name="short_description" required="required" class="form-control col-md-7 col-xs-12" value="{{$good->short_description}}">
+                                    <input type="text" id="short_description" name="short_description" required="required" class="form-control col-md-7 col-xs-12" value="{{$goods->short_description}}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="url" id="description" name="description" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$good->description}}">
+                                    <input type="url" id="description" name="description" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$goods->description}}">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">Icon <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="url" id="icon" name="icon" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$good->icon}}">
+                                    <input type="url" id="icon" name="icon" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$goods->icon}}">
                                 </div>
                             </div>
 
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <a href="/admin"><button id="cancel" type="button" class="btn btn-primary">Cancel</button></a>
+                                    <a href="{{route('goods.index')}}"><button id="cancel" type="button" class="btn btn-primary">Cancel</button></a>
                                     <button id="send" type="submit" class="btn btn-success">UPDATE</button>
                                 </div>
                             </div>
                         </form>
-                            @endforeach
                         @endif
 
 

@@ -141,6 +141,13 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'имя товара',
+        'short_description' => 'краткое описание',
+        'description' => 'описание',
+        'icon' => 'иконка',
+        'text' => 'текст',
+
+    ],
 
 ];

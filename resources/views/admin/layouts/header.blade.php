@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="/admin" class="site_title"><i class="fa fa-car"></i> <span>Auto Club</span></a>
+            <a href="{{route('goods.index')}}" class="site_title"><i class="fa fa-car"></i> <span>Auto Club</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -27,8 +27,8 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-car"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="/admin">Goods</a></li>
-                            <li><a href="/admin/photos">Photos</a></li>
+                            <li><a href="{{route('goods.index')}}">Goods</a></li>
+                            <li><a href="{{route('photos.index')}}">Photos</a></li>
                         </ul>
                     </li>
                 </ul>

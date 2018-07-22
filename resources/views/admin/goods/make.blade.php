@@ -43,7 +43,7 @@
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-3">
-                                        <a href="/admin"><button id="cancel" class="btn btn-primary">Cancel</button></a>
+                                        <a href="{{route('goods.index')}}"><button id="cancel" class="btn btn-primary">Cancel</button></a>
                                         <button id="send" type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>

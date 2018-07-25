@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Good;
+use App\Models\Admin\Goods;
+use App\Comments;
 
 class GoodController extends Controller
 {
@@ -34,6 +35,11 @@ class GoodController extends Controller
 //        $goods = Good::all();
 //        dd ($goods);
 //        return $goods;
+
+        $goods = Goods::all();
+        return view('goods.index', [
+            'goods' => $goods,
+        ]);
     }
 
     /**
@@ -43,7 +49,7 @@ class GoodController extends Controller
      */
     public function create()
     {
-        return view('goods.make');
+
     }
 
     /**
@@ -55,12 +61,12 @@ class GoodController extends Controller
     public function store(Request $request)
     {
         //        dd($request->all());
-        $this->validate($request, [
-            'name' => 'required',
-            'short_description' => 'required',
-            'description' => 'required',
-            'icon' => 'required',
-        ]);
+//        $this->validate($request, [
+//            'name' => 'required',
+//            'short_description' => 'required',
+//            'description' => 'required',
+//            'icon' => 'required',
+//        ]);
 //        $goodsObj = new Goods();
 //        $goodsObj ->name = $request->name;
 //        $goodsObj ->short_description = $request->short_description;
@@ -74,8 +80,8 @@ class GoodController extends Controller
 //        'description' => $request->description,
 //        'icon' => $request->icon,
 //            ]);
-        Good::create($request->all());
-        return redirect('/goods');
+//        Good::create($request->all());
+//        return redirect('/goods');
     }
 
     /**
@@ -86,7 +92,10 @@ class GoodController extends Controller
      */
     public function show($id)
     {
-        //
+        $good = Goods::find($id);
+        return view('goods.good', [
+            'goods' => $good,
+        ]);
     }
 
     /**
@@ -123,8 +132,4 @@ class GoodController extends Controller
         //
     }
 
-    public function view (){
-        $goods = Goods::all();
-        return $goods;
-    }
 }

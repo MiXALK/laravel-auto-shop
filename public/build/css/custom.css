@@ -3114,7 +3114,7 @@ ul.project_files li a i {
     border-right: 2px solid transparent
 }
 .thumbnail .image {
-    height: 690px;
+    /*height: 690px;*/
     overflow: hidden
 }
 .caption {

@@ -36,6 +36,10 @@ class GoodController extends Controller
 //        dd ($goods);
 //        return $goods;
 
+        $routes = collect (\Route::getRoutes())->map(function($route){
+            return $route->uri();
+        });
+
         $goods = Goods::all();
         return view('goods.index', [
             'goods' => $goods,

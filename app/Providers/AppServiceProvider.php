@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Menu;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//        $collection = collection ([
+//            ['name' => 'orders', 'link' => ''],
+//            ['name' => 'goods', 'link' => 'admin/goods'],
+//        ]);
+
+//        $collection =
+        view()->composer('includes.menu', function ($view){
+            $view->with('collection', Menu::all());
+
+        });
+
     }
 
     /**

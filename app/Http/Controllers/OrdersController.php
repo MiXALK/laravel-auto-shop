@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
-use App\Models\Admin\Goods;
 use Illuminate\Http\Request;
-use App\Mail\Mail;
+use App\Http\Controllers\Controller;
 
-class CommentsController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +24,18 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        //
+
+        $email = '';
+
+        if(\Auth::user() !== null){
+            $email = \Auth::user()->email;
+        }
+
+        return view('goods.order',
+            [
+                'email' => $email,
+            ]
+        );
     }
 
     /**
@@ -35,20 +44,9 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
-        $this->validate($request, [
-            'text' => 'required',
-
-        ]);
-
-        $item = Goods::find($id);
-        $item->addComments($request->text);
-
-        $user = \Auth::user();
-
-        \Mail::to($user)->send(new Mail($user));
-        return back();
+        //
     }
 
     /**
@@ -95,6 +93,4 @@ class CommentsController extends Controller
     {
         //
     }
-
-
 }

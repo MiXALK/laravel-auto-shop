@@ -12,7 +12,8 @@
 */
 
 Route::get('/', 'GoodController@index');
-
+Route::get('/order', 'OrdersController@create');
+Route::post('/order', 'OrdersController@store');
 
 Auth::routes();
 
@@ -27,7 +28,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::get('/goods', 'Admin\GoodsController@index')->name('goods.index');
     Route::get('/goods/create', 'Admin\GoodsController@create')->name('goods.create');
     Route::get('/goods/{id}', 'Admin\GoodsController@show')->name('goods.show');
-    Route::get('/goods/edit/{id}', 'Admin\GoodsController@edit')->name('goods.edit');
+    Route::get('/goods/edit/{goods}', 'Admin\GoodsController@edit')->name('goods.edit');
     Route::post('/goods', 'Admin\GoodsController@store');
     Route::patch('/goods/{id}', 'Admin\GoodsController@update');
     Route::delete('/goods/{id}', 'Admin\GoodsController@destroy');

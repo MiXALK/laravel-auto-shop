@@ -70,11 +70,13 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Goods $goods)
     {
-        $good = Goods::find($id);
+
+        //используется DI
+//        $good = Goods::find($id);
         return view('admin.goods.edit', [
-            'goods' => $good,
+            'goods' => $goods,
         ]);
     }
 

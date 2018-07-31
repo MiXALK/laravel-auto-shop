@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'GoodController@index');
+Route::get('/goods/{id}', 'GoodController@show')->name('auto.show');
+
 Route::get('/order', 'OrdersController@create');
 Route::post('/order', 'OrdersController@store');
 
@@ -43,7 +45,6 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::delete('/photos/{id}', 'Admin\PhotosController@destroy');
 });
 
-Route::get('/comment', 'Admin\GoodsController@view');
-
 Route::post('/admin/goods/{id}/comments', 'CommentsController@store');
+Route::post('/admin/goods/{id}/photo', 'Admin\PhotosController@attach');
 

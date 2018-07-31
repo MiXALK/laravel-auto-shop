@@ -13,15 +13,15 @@ class Orders extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('email');
-            $table->string('good_name');
-            $table->foreign('good_name')
-                ->references('name')->on('goods')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-        });
+//        Schema::create('orders', function (Blueprint $table) {
+//            $table->integer('id', true);
+//            $table->string('email');
+//            $table->string('good_name');
+//            $table->foreign('good_name')
+//                ->references('name')->on('goods')
+//                ->onDelete('cascade')
+//                ->onUpdate('cascade');
+//        });
     }
 
     /**

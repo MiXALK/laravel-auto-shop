@@ -96,9 +96,16 @@ class GoodController extends Controller
      */
     public function show($id)
     {
+        $goods = Goods::all();
+
+        var_dump($goods);
+        $count = count([
+            'goods' => $goods,
+        ]);
         $good = Goods::find($id);
         return view('goods.good', [
-            'goods' => $good,
+            'good' => $good,
+            'count' => $count
         ]);
     }
 

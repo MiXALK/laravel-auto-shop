@@ -97,7 +97,8 @@
 }
 
 .m-home .b-featured__item > a img{
-    margin-top: 10px;
+    max-width: 167px;
+    min-height: 125px;
 }
 
 .m-home .b-featured__item-price{

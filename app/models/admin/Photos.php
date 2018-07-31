@@ -10,7 +10,4 @@ class Photos extends Model
 
     protected $fillable = ['name', 'alt', 'title', 'path'];
 
-    public static function getItem($id){
-        return static :: where ('id', $id )->get();
-    }
 }

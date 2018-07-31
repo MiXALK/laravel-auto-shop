@@ -16,10 +16,6 @@
 
     <!-- SWITCHER -->
     <link rel="stylesheet" id="switcher-css" type="text/css" href="{{ asset('assets/switcher/css/switcher.css') }}" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color1.css') }}" title="color1" media="all"  />
-    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color2.css') }}" title="color2" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color3.css') }}" title="color3" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color4.css') }}" title="color4" media="all" />
     <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color5.css') }}" title="color5" media="all" data-default-color="true"/>
     <link rel="alternate stylesheet" type="text/css" href="{{ asset('assets/switcher/css/color6.css') }}" title="color6" media="all" />
 
@@ -147,40 +143,35 @@
                     {{--<!-- Right Side Of Navbar -->--}}
                     {{--<ul class="navbar-nav ml-auto">--}}
                         <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        {{--@guest--}}
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                        {{--@else--}}
+                            {{--<li class="nav-item dropdown">--}}
+                                {{--<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}
+                                    {{--{{ Auth::user()->name }} <span class="caret"></span>--}}
+                                {{--</a>--}}
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                                {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">--}}
+                                    {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
+                                       {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+                                        {{--{{ __('Logout') }}--}}
+                                    {{--</a>--}}
+
+                                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                        {{--@csrf--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                            {{--</li>--}}
+                        {{--@endguest--}}
                     {{--</ul>--}}
                 {{--</div>--}}
             {{--</div>--}}
         {{--</nav>--}}
 
-        <main class="py-4">
             @yield('content')
-        </main>
+
+
     </div>
     <footer class="b-footer">
         <a id="to-top" href="#this-is-top"><i class="fa fa-chevron-up"></i></a>

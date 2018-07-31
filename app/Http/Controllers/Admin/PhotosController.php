@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Photos;
+use App\Models\Admin\Goods;
 
 class PhotosController extends Controller
 {
@@ -117,5 +118,18 @@ class PhotosController extends Controller
         $photo = Photos::find($id);
         $photo->delete();
         return redirect('/admin/photos');
+    }
+
+    public function attach(Request $request, $id)
+    {
+        $this->validate($request, [
+            'goods_id' => 'required',
+
+        ]);
+
+        $item = Goods::find($id);
+        $item->addPhotos($request->goods_id);
+
+        return back();
     }
 }

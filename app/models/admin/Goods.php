@@ -28,4 +28,8 @@ class Goods extends Model
         return $this->belongsToMany(Photos::class, 'goodsPhotos');
     }
 
+    public function addPhotos ($goods_id){
+        $this->photos()->attach(['goods_id' => $goods_id]);
+    }
+
 }

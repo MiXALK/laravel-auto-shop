@@ -8,6 +8,8 @@ use App\Http\Requests\GoodsRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
 use App\Comments;
+use App\Models\Admin\Photos;
+
 
 
 class GoodsController extends Controller
@@ -58,9 +60,13 @@ class GoodsController extends Controller
      */
     public function show($id)
     {
+        $photos = Photos::all();
+        $count = count($photos);
+
         $good = Goods::find($id);
         return view('admin.goods.good', [
             'goods' => $good,
+            'count' => $count
         ]);
     }
 
@@ -117,10 +123,4 @@ class GoodsController extends Controller
 
     }
 
-    public function view()
-    {
-        return $this->view('admin.goods.view', [
-        ]);
-
-    }
 }

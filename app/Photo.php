@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Admin\Goods;
 
 class Photo extends Model
 {
@@ -10,8 +11,7 @@ class Photo extends Model
 
     protected $fillable = ['name', 'alt', 'title', 'path'];
 
-
-    public static function getItem(){
-        return static :: where ('id', 1 )->get();
+    public function additionalPhotos(){
+        return $this->belongsTo(Goods::class);
     }
 }

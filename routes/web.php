@@ -43,8 +43,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::post('/photos', 'Admin\PhotosController@store');
     Route::patch('/photos/{id}', 'Admin\PhotosController@update');
     Route::delete('/photos/{id}', 'Admin\PhotosController@destroy');
+    Route::post('/goods/{id}/photo', 'Admin\PhotosController@attach');
+    Route::post('/goods/{id}/shop', 'ShopController@attach');
+
+
 });
 
 Route::post('/admin/goods/{id}/comments', 'CommentsController@store');
-Route::post('/admin/goods/{id}/photo', 'Admin\PhotosController@attach');
 

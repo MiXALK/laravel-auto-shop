@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Comments;
+use App\Shop;
 use Illuminate\Database\Eloquent\Model;
 
 class Goods extends Model
@@ -32,4 +33,11 @@ class Goods extends Model
         $this->photos()->attach(['goods_id' => $goods_id]);
     }
 
+    public function shops(){
+        return $this->belongsToMany(Shop::class, 'shopsGoods');
+    }
+
+    public function addShop ($addressId){
+        $this->shops()->attach(['shop_id' => $addressId]);
+    }
 }

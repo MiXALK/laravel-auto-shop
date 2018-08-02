@@ -11,7 +11,4 @@ class Photo extends Model
 
     protected $fillable = ['name', 'alt', 'title', 'path'];
 
-    public function additionalPhotos(){
-        return $this->belongsTo(Goods::class);
-    }
 }

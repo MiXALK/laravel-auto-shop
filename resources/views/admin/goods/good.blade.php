@@ -32,40 +32,77 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs-12">
 
             @foreach($goods->comments as $comment)
                 <p>{{$comment->text}}</p>
             @endforeach
-            <a href="{{ route('goods.index') }}"><button type="button" class="btn btn-success navbar-right">BACK</button></a>
+            </div>
 
             <div class="card-block">
                 <form action="/admin/goods/{{$goods->id}}/comments" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="text" placeholder="" required="required" type="text">
+                            <input id="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="text" placeholder="" type="text">
                         </div>
                         <button type="submit" class="btn btn-success navbar-left"><i>Save</i></button>
                     </div>
                 </form>
             </div>
+            @if(count($errors))
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </div>
+            @endif
             @foreach($goods->photos as $photo)
                 <img src="{{$photo->path}}" alt="{{$photo->alt}}">
             @endforeach
             <div class="col-xs-12">
-                <p>Прикрепите ID изображения</p>
+                <h4>Прикрепите изображение</h4>
                 <form action="/admin/goods/{{$goods->id}}/photo" method="post">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input class="form-control col-md-7 col-xs-12" data-validate-length-range="6" name="goods_id" placeholder="" required="required" type="number" min="1" max="{{$count}}">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                        <select class="form-control col-md-7 col-xs-12" name="photo_id" required="required">
+                            @foreach($photos as $photo)
+                                <option value="{{$photo->id}}">{{$photo->name}}</option>
+                            @endforeach
+                        </select>
                         </div>
                         <button type="submit" class="btn btn-success navbar-left"><i>Прикрепить</i></button>
 
                     </div>
                 </form>
             </div>
+            <br>
+            <div class="col-xs-12">
+                @foreach($goods->shops as $shop)
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+                    <span>{{$shop->address}}</span>
+                    </div>
+                @endforeach
+            </div>
+            <div class="col-xs-12">
+                <h4>Добавить адресс магазина</h4>
+                <form action="/admin/goods/{{$goods->id}}/shop" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <select class="form-control col-md-7 col-xs-12" name="address" required="required">
+                                @foreach($shops as $shop)
+                                    <option value="{{$shop->id}}">{{$shop->address}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success navbar-left"><i>Добавить</i></button>
+                    </div>
+                </form>
+            </div>
             @endif
+            <a href="{{ route('goods.index') }}"><button type="button" class="btn btn-success navbar-right">BACK</button></a>
         </div>
     </div>
 

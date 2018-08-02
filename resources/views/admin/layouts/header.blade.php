@@ -25,12 +25,9 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a><i class="fa fa-car"></i> Dashboard <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="{{route('goods.index')}}">Goods</a></li>
-                            <li><a href="{{route('photos.index')}}">Photos</a></li>
-                        </ul>
-                    </li>
+                    @include('includes.menu')
+
+
                 </ul>
             </div>
         </div>
@@ -38,7 +35,7 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
         </div>

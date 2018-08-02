@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
-use App\Comments;
+
 
 class GoodController extends Controller
 {
@@ -36,9 +36,9 @@ class GoodController extends Controller
 //        dd ($goods);
 //        return $goods;
 
-        $routes = collect (\Route::getRoutes())->map(function($route){
-            return $route->uri();
-        });
+//        $routes = collect (\Route::getRoutes())->map(function($route){
+//            return $route->uri();
+//        });
 
         $goods = Goods::all();
         return view('goods.index', [
@@ -53,7 +53,7 @@ class GoodController extends Controller
      */
     public function create()
     {
-        return view('admin.goods.make');
+        //
     }
 
     /**
@@ -96,16 +96,9 @@ class GoodController extends Controller
      */
     public function show($id)
     {
-        $goods = Goods::all();
-
-        var_dump($goods);
-        $count = count([
-            'goods' => $goods,
-        ]);
         $good = Goods::find($id);
         return view('goods.good', [
             'good' => $good,
-            'count' => $count
         ]);
     }
 

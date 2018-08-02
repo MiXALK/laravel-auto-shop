@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Comments;
-use App\Models\Admin\Goods;
 use Illuminate\Http\Request;
-use App\Mail\Mail;
-use App\Http\Requests\CommentsRequest;
+use App\Http\Controllers\Controller;
+use App\Models\Admin\Goods;
+use App\Http\Requests\ShopsRequest;
 
-class CommentsController extends Controller
+
+
+class ShopController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,17 +37,9 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CommentsRequest $request, $id)
+    public function store(Request $request)
     {
-        $request->rules();
-
-        $item = Goods::find($id);
-        $item->addComments($request->text);
-
-        $user = \Auth::user();
-
-        \Mail::to($user)->send(new Mail($user));
-        return back();
+        //
     }
 
     /**
@@ -94,5 +87,13 @@ class CommentsController extends Controller
         //
     }
 
+    public function attach(ShopsRequest $request, $id)
+    {
+        $request->rules();
 
+        $item = Goods::find($id);
+        $item->addShop($request->address);
+
+        return back();
+    }
 }

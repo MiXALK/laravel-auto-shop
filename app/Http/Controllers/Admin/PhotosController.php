@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Photos;
 use App\Models\Admin\Goods;
+use App\Http\Requests\PhotosRequest;
+
 
 class PhotosController extends Controller
 {
@@ -40,14 +42,10 @@ class PhotosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotosRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'alt' => 'required',
-            'title' => 'required',
-            'path' => 'required',
-        ]);
+        $request->rules();
+
         Photos::create($request->all());
         return redirect('/admin/photos');
     }
@@ -60,7 +58,7 @@ class PhotosController extends Controller
      */
     public function show($id)
     {
-        $photos = Photos::getItem($id);
+        $photos = Photos::find($id);
         return view('admin.photos.photo', [
             'photos' => $photos,
         ]);
@@ -74,7 +72,7 @@ class PhotosController extends Controller
      */
     public function edit($id)
     {
-        $photos = Photos::getItem($id);
+        $photos = Photos::find($id);
         return view('admin.photos.edit', [
             'photos' => $photos,
         ]);
@@ -87,15 +85,9 @@ class PhotosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PhotosRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'alt' => 'required',
-            'title' => 'required',
-            'path' => 'required',
-        ]);
-
+        $request->rules();
 
         Photos::where("id", $id)->update([
             "name" => $request->name,
@@ -123,12 +115,14 @@ class PhotosController extends Controller
     public function attach(Request $request, $id)
     {
         $this->validate($request, [
-            'goods_id' => 'required',
-
+            'photo_id' => 'required',
+            'alt' => 'required',
+            'title' => 'required',
+            'path' => 'required',
         ]);
 
         $item = Goods::find($id);
-        $item->addPhotos($request->goods_id);
+        $item->addPhotos($request->photo_id);
 
         return back();
     }

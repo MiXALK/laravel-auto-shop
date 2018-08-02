@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
 use App\Comments;
 use App\Models\Admin\Photos;
+use App\Shop;
 
 
 
@@ -61,12 +62,14 @@ class GoodsController extends Controller
     public function show($id)
     {
         $photos = Photos::all();
-        $count = count($photos);
+
+        $shops = Shop::all();
 
         $good = Goods::find($id);
         return view('admin.goods.good', [
             'goods' => $good,
-            'count' => $count
+            'photos' => $photos,
+            'shops' => $shops,
         ]);
     }
 

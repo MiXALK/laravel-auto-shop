@@ -34,22 +34,27 @@
                                                 <img class="img-responsive center-block" src="{{$good->icon}}" alt="nissan" />
                                             </li>
                                             @foreach($good->photos as $photo)
+                                                @if($photo)
                                                 <li class="s-relative">
                                                     <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
                                                     <img class="img-responsive center-block" src="{{$photo->path}}" alt="{{$photo->alt}}" />
                                                 </li>
+                                                @endif
                                             @endforeach
                                         </ul>
                                     </div>
                                     <div class="col-xs-2 pagerSlider pagerVertical">
                                         <div class="b-detail__main-info-images-small" id="bx-pager">
                                             <a href="#" data-slide-index="0" class="b-detail__main-info-images-small-one">
-                                                <img class="img-responsive" src="{{$good->icon}}" alt="{{$photo->alt}}" />
+                                                <img class="img-responsive" src="{{$good->icon}}" alt="" />
                                             </a>
                                             @foreach($good->photos as $photo)
+                                                @if($photo)
+
                                                 <a href="#" data-slide-index="1" class="b-detail__main-info-images-small-one">
                                                     <img class="img-responsive" src="{{$photo->path}}" alt="{{$photo->alt}}" />
                                                 </a>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>
@@ -164,102 +169,17 @@
                                         <p class="b-detail__main-aside-desc-value">{{$good->name}}</p>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Kilometres</h4>
+
+                                <h2 class="s-titleDet">Shops</h2>
+                                @if($good->shops)
+                                @foreach($good->shops as $shop)
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <h4 class="b-detail__main-aside-desc-title">{{$shop->address}}</h4>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">39,000 km</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Body Type</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">Sedan</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Style/trim</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">SV Premium</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Engine</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">V-6 cyl</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Drivetrain</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">EWD</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Transmission</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">Dual-Clutch Automatic</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Exterior Color</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">Dark Grey</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Interior color</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">Jet Black</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Passangers/Doors</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">5 Passengers / 4 Doors</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Fuel Type</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">Gasoline Fue</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">City Fuel Economy </h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">10.8L/100km</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4 class="b-detail__main-aside-desc-title">Hwy Fuel Economy</h4>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <p class="b-detail__main-aside-desc-value">7.7L/100km</p>
-                                    </div>
-                                </div>
+                                @endforeach
+                                @endif
                             </div>
                             <div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
                                 <h2 class="s-titleDet">INQUIRE ABOUT THIS VEHICLE</h2>

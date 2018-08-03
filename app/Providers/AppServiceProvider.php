@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Menu;
+use App\Category;
+use Illuminate\Support\Facades\View;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,9 +22,12 @@ class AppServiceProvider extends ServiceProvider
 //            ['name' => 'goods', 'link' => 'admin/goods'],
 //        ]);
 
-//        $collection =
-        view()->composer('includes.menu', function ($view){
-            $view->with('collection', Menu::all());
+//        view()->composer('includes.menu', function ($view){
+//            $view->with('collection', Menu::all());
+//
+//        });
+        View::composer('includes.headerMenu', function ($view){
+            $view->with('categories', Category::where('parent_id', 0)->get());
 
         });
 

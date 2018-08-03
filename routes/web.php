@@ -46,8 +46,18 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::post('/goods/{id}/photo', 'Admin\PhotosController@attach');
     Route::post('/goods/{id}/shop', 'ShopController@attach');
 
+    // category
+    Route::get('/category', 'CategoryController@index')->name('category.index');
+    Route::get('/category/create', 'CategoryController@create')->name('category.create');
+    Route::get('/category/{id}', 'CategoryController@show')->name('category.show');
+    Route::get('/category/edit/{category}', 'CategoryController@edit')->name('category.edit');
+    Route::post('/category', 'CategoryController@store');
+    Route::patch('/category/{id}', 'CategoryController@update');
+    Route::delete('/category/{id}', 'CategoryController@destroy');
+
+
+    Route::post('/goods/{id}/comments', 'CommentsController@store');
 
 });
 
-Route::post('/admin/goods/{id}/comments', 'CommentsController@store');
 

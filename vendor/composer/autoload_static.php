@@ -320,6 +320,7 @@ class ComposerStaticInitc93e6dc3d8f36fcf8ae541c82dbe6679
     );
 
     public static $classMap = array (
+        'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
         'App\\Comments' => __DIR__ . '/../..' . '/app/Comments.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -344,7 +345,9 @@ class ComposerStaticInitc93e6dc3d8f36fcf8ae541c82dbe6679
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\CommentsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CommentsRequest.php',
         'App\\Http\\Requests\\GoodsRequest' => __DIR__ . '/../..' . '/app/Http/Requests/GoodsRequest.php',
+        'App\\Http\\Requests\\PhotosRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PhotosRequest.php',
         'App\\Mail\\Mail' => __DIR__ . '/../..' . '/app/Mail/Mail.php',
         'App\\Menu' => __DIR__ . '/../..' . '/app/Menu.php',
         'App\\Models\\Admin\\Goods' => __DIR__ . '/../..' . '/app/models/admin/Goods.php',
@@ -358,8 +361,6 @@ class ComposerStaticInitc93e6dc3d8f36fcf8ae541c82dbe6679
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Shop' => __DIR__ . '/../..' . '/app/Shop.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
-        'App\\models\\admin\\Good' => __DIR__ . '/../..' . '/app/models/admin/Good.php',
-        'App\\models\\admin\\Photo' => __DIR__ . '/../..' . '/app/models/admin/Photo.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

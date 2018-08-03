@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Category' => $baseDir . '/app/Category.php',
     'App\\Comments' => $baseDir . '/app/Comments.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -30,7 +31,9 @@ return array(
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\CommentsRequest' => $baseDir . '/app/Http/Requests/CommentsRequest.php',
     'App\\Http\\Requests\\GoodsRequest' => $baseDir . '/app/Http/Requests/GoodsRequest.php',
+    'App\\Http\\Requests\\PhotosRequest' => $baseDir . '/app/Http/Requests/PhotosRequest.php',
     'App\\Mail\\Mail' => $baseDir . '/app/Mail/Mail.php',
     'App\\Menu' => $baseDir . '/app/Menu.php',
     'App\\Models\\Admin\\Goods' => $baseDir . '/app/models/admin/Goods.php',
@@ -44,8 +47,6 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Shop' => $baseDir . '/app/Shop.php',
     'App\\User' => $baseDir . '/app/User.php',
-    'App\\models\\admin\\Good' => $baseDir . '/app/models/admin/Good.php',
-    'App\\models\\admin\\Photo' => $baseDir . '/app/models/admin/Photo.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\Exceptions\\InvalidDateException' => $vendorDir . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',

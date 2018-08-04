@@ -40,10 +40,17 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Цена <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" id="price" name="price" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="item form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">Раздел <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select multiple="multiple" name="categories[]">
+                                        <select name="categories" class="form-control col-md-7 col-xs-12">
                                             @include('admin.goods.categories', ['categories' => $categories])
                                         </select>
                                     </div>

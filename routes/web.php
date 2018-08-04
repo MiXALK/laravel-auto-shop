@@ -22,45 +22,47 @@ Auth::routes();
 
 Route::get('/contact', 'ContactController@index');
 Route::get('/photos', 'PhotoController@index')->name('photo');
-Route::get('/photos/($id)', 'PhotoController@view')->name('photo');
+Route::get('/photos/($id)', 'PhotoController@view')->name('photo.view');
+Route::get('/category/{slug}', 'CategoryController@category');
 
 
 Route::prefix('admin')->middleware(['auth'])->group(function(){
-    // admin goods
-    Route::get('/goods', 'Admin\GoodsController@index')->name('goods.index');
-    Route::get('/goods/create', 'Admin\GoodsController@create')->name('goods.create');
-    Route::get('/goods/{id}', 'Admin\GoodsController@show')->name('goods.show');
-    Route::get('/goods/edit/{goods}', 'Admin\GoodsController@edit')->name('goods.edit');
-    Route::post('/goods', 'Admin\GoodsController@store');
-    Route::patch('/goods/{id}', 'Admin\GoodsController@update');
-    Route::delete('/goods/{id}', 'Admin\GoodsController@destroy');
 
-    // admin photos
-    Route::get('/photos', 'Admin\PhotosController@index')->name('photos.index');
-    Route::get('/photos/create', 'Admin\PhotosController@create')->name('photos.create');
-    Route::get('/photos/{id}', 'Admin\PhotosController@show')->name('photos.show');
-    Route::get('/photos/edit/{id}', 'Admin\PhotosController@edit')->name('photos.edit');
-    Route::post('/photos', 'Admin\PhotosController@store');
-    Route::patch('/photos/{id}', 'Admin\PhotosController@update');
-    Route::delete('/photos/{id}', 'Admin\PhotosController@destroy');
-    Route::post('/goods/{id}/photo', 'Admin\PhotosController@attach');
-    Route::post('/goods/{id}/shop', 'ShopController@attach');
+    Route::prefix('goods')->group(function (){
+        Route::get('/', 'Admin\GoodsController@index')->name('goods.index');
+        Route::get('/create', 'Admin\GoodsController@create')->name('goods.create');
+        Route::get('/{id}', 'Admin\GoodsController@show')->name('goods.show');
+        Route::get('/edit/{goods}', 'Admin\GoodsController@edit')->name('goods.edit');
+        Route::post('/', 'Admin\GoodsController@store');
+        Route::patch('/{goods}', 'Admin\GoodsController@update')->name('goods.update');
+        Route::delete('/{id}', 'Admin\GoodsController@destroy');
+        Route::post('/{id}/photo', 'Admin\PhotosController@attach');
+        Route::post('/{id}/shop', 'ShopController@attach');
+        Route::post('/{id}/comments', 'CommentsController@store');
+    });
 
-    // category
-    Route::get('/category', 'CategoryController@index')->name('category.index');
-    Route::get('/category/create', 'CategoryController@create')->name('category.create');
-    Route::get('/category/{id}', 'CategoryController@show')->name('category.show');
-    Route::get('/category/edit/{category}', 'CategoryController@edit')->name('category.edit');
-    Route::post('/category', 'CategoryController@store');
-    Route::patch('/category/{id}', 'CategoryController@update');
-    Route::delete('/category/{id}', 'CategoryController@destroy');
+    Route::prefix('photos')->group(function (){
+        Route::get('/', 'Admin\PhotosController@index')->name('photos.index');
+        Route::get('/create', 'Admin\PhotosController@create')->name('photos.create');
+        Route::get('/{id}', 'Admin\PhotosController@show')->name('photos.show');
+        Route::get('/edit/{id}', 'Admin\PhotosController@edit')->name('photos.edit');
+        Route::post('/', 'Admin\PhotosController@store');
+        Route::patch('/{id}', 'Admin\PhotosController@update')->name('photos.update');
+        Route::delete('/{id}', 'Admin\PhotosController@destroy');
+    });
 
-
-    Route::post('/goods/{id}/comments', 'CommentsController@store');
+    Route::prefix('category')->group(function (){
+        Route::get('/', 'CategoryController@index')->name('category.index');
+        Route::get('/create', 'CategoryController@create')->name('category.create');
+        Route::get('/{id}', 'CategoryController@show')->name('category.show');
+        Route::get('/edit/{category}', 'CategoryController@edit')->name('category.edit');
+        Route::post('/', 'CategoryController@store');
+        Route::patch('/{id}', 'CategoryController@update')->name('category.update');
+        Route::delete('/{category}', 'CategoryController@destroy');
+    });
 
 });
 
-Route::get('/category/{slug?}', 'CategoryController@category');
 
 
 

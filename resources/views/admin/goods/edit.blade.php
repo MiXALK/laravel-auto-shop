@@ -8,10 +8,10 @@
                     <div class="x_content">
                         @if(count($goods))
 
-                        <form class="form-horizontal form-label-left" novalidate action="/admin/goods/{{$goods->id}}" method="post">
+                        <form class="form-horizontal form-label-left" novalidate action="{{route('goods.update', $goods)}}" method="post">
                             {{ csrf_field() }}
                             @method('PATCH')
-                            <span class="section">Edit {{$goods->name}}</span>
+                            <span class="section">Редактировать {{$goods->name}}</span>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name item <span class="required">*</span>
                                 </label>
@@ -40,6 +40,23 @@
                                     <input type="url" id="icon" name="icon" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$goods->icon}}">
                                 </div>
                             </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="price">Цена <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="price" name="price" required="required" data-validate-minmax="10,100" class="form-control col-md-7 col-xs-12" value="{{$goods->price}}">
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">Раздел <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select name="categories" class="form-control col-md-7 col-xs-12">
+                                        @include('admin.goods.categories', ['categories' => $categories])
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="ln_solid"></div>
                             <div class="form-group">

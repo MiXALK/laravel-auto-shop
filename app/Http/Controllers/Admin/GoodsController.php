@@ -17,7 +17,6 @@ use App\Category;
 class GoodsController extends Controller
 {
 
-
     /**
      * Display a listing of the resource.
      *
@@ -58,12 +57,12 @@ class GoodsController extends Controller
      */
     public function store(GoodsRequest $request)
     {
-        $request->rules();
         $goods = Goods::create($request->all());
 
         if($request->input('categories')) :
             $goods->categories()->attach($request->input('categories'));
         endif;
+
         return redirect()->route('goods.index');
     }
 
@@ -76,10 +75,9 @@ class GoodsController extends Controller
     public function show($id)
     {
         $photos = Photos::all();
-
         $shops = Shop::all();
-
         $good = Goods::find($id);
+
         return view('admin.goods.good', [
             'goods' => $good,
             'photos' => $photos,
@@ -95,9 +93,7 @@ class GoodsController extends Controller
      */
     public function edit(Goods $goods)
     {
-
         //используется DI
-//        $good = Goods::find($id);
         return view('admin.goods.edit', [
             'goods' => $goods,
             'categories' => Category::with('children')->where('parent_id', 0)->get(),
@@ -112,18 +108,16 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(GoodsRequest $request, $id)
+    public function update(GoodsRequest $request, Goods $goods)
     {
-        //блок заменен строчкой ниже
-//        $this->validate($request, [
-//            'name' => 'required',
-//            'short_description' => 'required',
-//            'description' => 'required',
-//            'icon' => 'required',
-//        ]);
+        $goods->update($request->all());
 
-        $request->rules();
-        Goods::find($id)->update($request->all());
+        // Categories
+        $goods->categories()->detach();
+        if($request->input('categories')) :
+            $goods->categories()->attach($request->input('categories'));
+        endif;
+
         return back();
 
     }
@@ -137,8 +131,8 @@ class GoodsController extends Controller
     public function destroy($id)
     {
         $good = Goods::find($id);
-        $good->delete();
         $good->categories()->detach();
+        $good->delete();
         return redirect()->route('goods.index');
 
     }

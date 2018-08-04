@@ -15,7 +15,7 @@ class Goods extends Model
     //если в таблице нет времени создания
     public $timestamps = false;
 
-    protected $fillable = ['name', 'short_description', 'description', 'icon'];
+    protected $fillable = ['name', 'short_description', 'description', 'icon', 'price'];
 
     public static function getItem($id){
         return static :: where ('id', $id )->get();

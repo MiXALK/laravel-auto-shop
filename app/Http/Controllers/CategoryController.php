@@ -113,7 +113,7 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug)->first();
         return view('category.index', [
             'category' => $category,
-            'goods' => $category->goods(),
+            'goods' => $category->goods()->get(),
         ]);
     }
 }

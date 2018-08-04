@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Admin\Goods;
 
 class Category extends Model
 {
@@ -24,7 +25,7 @@ class Category extends Model
     }
 
     public function goods(){
-        return $this->morphedByMany('\App\Admin\Goods', 'categoryable');
+        return $this->morphedByMany(Goods::class, 'categoryables');
     }
 
 }

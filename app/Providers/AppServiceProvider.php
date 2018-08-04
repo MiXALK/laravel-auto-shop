@@ -26,9 +26,8 @@ class AppServiceProvider extends ServiceProvider
 //            $view->with('collection', Menu::all());
 //
 //        });
-        View::composer('includes.headerMenu', function ($view){
-            $view->with('categories', Category::where('parent_id', 0)->get());
-
+        view()->composer('layouts.app', function ($view){
+            $view->with('categories', \App\Category::where('parent_id', 0)->get());
         });
 
     }

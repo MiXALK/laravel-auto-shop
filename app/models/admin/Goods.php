@@ -3,8 +3,12 @@
 namespace App\Models\Admin;
 
 use App\Comments;
+use App\Category;
 use App\Shop;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
+
 
 class Goods extends Model
 {
@@ -18,7 +22,7 @@ class Goods extends Model
     }
 
     public function comments(){
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comments::class)->orderByDesc('created_at');
     }
 
     public function addComments ($text){
@@ -39,5 +43,15 @@ class Goods extends Model
 
     public function addShop ($addressId){
         $this->shops()->attach(['shop_id' => $addressId]);
+    }
+
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categoryables');
+    }
+
+    public static function limitGoods(){
+        return DB::table('goods')
+            ->whereBetween('price', array(100, 200))->get();
     }
 }

@@ -22,4 +22,9 @@ class Category extends Model
     public function setSlugAttribute() {
         $this->attributes['slug'] = Str::slug( mb_substr($this->title, 0, 30), '_');
     }
+
+    public function goods(){
+        return $this->morphedByMany('\App\Admin\Goods', 'categoryable');
+    }
+
 }

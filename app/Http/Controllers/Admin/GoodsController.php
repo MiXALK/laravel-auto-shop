@@ -10,6 +10,7 @@ use App\Models\Admin\Goods;
 use App\Comments;
 use App\Models\Admin\Photos;
 use App\Shop;
+use App\Category;
 
 
 
@@ -24,7 +25,10 @@ class GoodsController extends Controller
      */
     public function index()
     {
+
         $goods = Goods::all();
+//        2 - Вывести товары где цена в диапазоне
+//        dd(Goods::whereBetween('price', array(100, 200))->get());
         return view('admin.goods.index', [
             'goods' => $goods,
         ]);
@@ -37,7 +41,13 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        return view('admin.goods.make');
+        return view('admin.goods.make',
+        [
+            'goods'    => [],
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'delimiter'  => ''
+        ]);
+
     }
 
     /**
@@ -49,7 +59,11 @@ class GoodsController extends Controller
     public function store(GoodsRequest $request)
     {
         $request->rules();
-        Goods::create($request->all());
+        $goods = Goods::create($request->all());
+
+        if($request->input('categories')) :
+            $goods->categories()->attach($request->input('categories'));
+        endif;
         return redirect()->route('goods.index');
     }
 
@@ -86,6 +100,8 @@ class GoodsController extends Controller
 //        $good = Goods::find($id);
         return view('admin.goods.edit', [
             'goods' => $goods,
+            'categories' => Category::with('children')->where('parent_id', 0)->get(),
+            'delimiter'  => ''
         ]);
     }
 
@@ -122,6 +138,7 @@ class GoodsController extends Controller
     {
         $good = Goods::find($id);
         $good->delete();
+        $good->categories()->detach();
         return redirect()->route('goods.index');
 
     }

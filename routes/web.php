@@ -60,4 +60,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
 
 });
 
+Route::get('/category/{slug?}', 'CategoryController@category');
+
+
 

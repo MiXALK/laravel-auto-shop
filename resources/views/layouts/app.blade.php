@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-sm-9 col-xs-8">
                         <div class="b-nav__list wow slideInRight" data-wow-delay="0.3s">
-
+                            @include('includes.headerMenu', ['categories' => $categories])
                         </div>
                     </div>
                 </div>

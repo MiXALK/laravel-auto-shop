@@ -46,7 +46,6 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'slug' => 'required',
             'parent_id' => 'required',
         ]);
         Category::create($request->all());
@@ -91,7 +90,6 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'slug' => 'required',
             'parent_id' => 'required',
         ]);
 
@@ -109,5 +107,13 @@ class CategoryController extends Controller
     {
         $category->delete();
         return redirect()->route('category.index');
+    }
+
+    public function category($slug){
+        $category = Category::where('slug', $slug)->first();
+        return view('category.index', [
+            'category' => $category,
+            'goods' => $category->goods(),
+        ]);
     }
 }

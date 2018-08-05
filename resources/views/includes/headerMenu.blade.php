@@ -9,10 +9,10 @@
 <div class="collapse navbar-collapse navbar-main-slide" id="nav">
     <ul class="navbar-nav-menu">
         @foreach($categories as $category)
-
             @if($category->children->count())
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{url("category/$category->slug")}}">{{$category->title}}
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       href="{{url("category/$category->slug")}}">{{$category->title}}
                         <span class="fa fa-caret-down"></span></a>
                     <ul class="dropdown-menu h-nav">
                         @include('includes.headerMenu', ['categories' => $category->children])
@@ -20,8 +20,9 @@
             @else
                 <li><a href="{{url("category/$category->slug")}}">{{$category->title}}</a></li>
 
-            @endif
-            </li>
-        @endforeach
+                @endif
+
+                </li>
+                @endforeach
     </ul>
 </div>

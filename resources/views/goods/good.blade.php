@@ -29,31 +29,40 @@
                             <div class="b-detail__main-info-images wow zoomInUp" data-wow-delay="0.5s">
                                 <div class="row m-smallPadding">
                                     <div class="col-xs-10">
-                                        <ul class="b-detail__main-info-images-big bxslider enable-bx-slider" data-pager-custom="#bx-pager" data-mode="horizontal" data-pager-slide="true" data-mode-pager="vertical" data-pager-qty="5">
+                                        <ul class="b-detail__main-info-images-big bxslider enable-bx-slider"
+                                            data-pager-custom="#bx-pager" data-mode="horizontal" data-pager-slide="true"
+                                            data-mode-pager="vertical" data-pager-qty="5">
                                             <li class="s-relative">
-                                                <img class="img-responsive center-block" src="{{$good->icon}}" alt="nissan" />
+                                                <img class="img-responsive center-block" src="{{$good->icon}}"
+                                                     alt="nissan"/>
                                             </li>
                                             @foreach($good->photos as $photo)
                                                 @if($photo)
-                                                <li class="s-relative">
-                                                    <a data-toggle="modal" data-target="#myModal" href="#" class="b-items__cars-one-img-video"><span class="fa fa-film"></span>VIDEO</a>
-                                                    <img class="img-responsive center-block" src="{{$photo->path}}" alt="{{$photo->alt}}" />
-                                                </li>
+                                                    <li class="s-relative">
+                                                        <a data-toggle="modal" data-target="#myModal" href="#"
+                                                           class="b-items__cars-one-img-video"><span
+                                                                    class="fa fa-film"></span>VIDEO</a>
+                                                        <img class="img-responsive center-block" src="{{$photo->path}}"
+                                                             alt="{{$photo->alt}}"/>
+                                                    </li>
                                                 @endif
                                             @endforeach
                                         </ul>
                                     </div>
                                     <div class="col-xs-2 pagerSlider pagerVertical">
                                         <div class="b-detail__main-info-images-small" id="bx-pager">
-                                            <a href="#" data-slide-index="0" class="b-detail__main-info-images-small-one">
-                                                <img class="img-responsive" src="{{$good->icon}}" alt="" />
+                                            <a href="#" data-slide-index="0"
+                                               class="b-detail__main-info-images-small-one">
+                                                <img class="img-responsive" src="{{$good->icon}}" alt=""/>
                                             </a>
                                             @foreach($good->photos as $photo)
                                                 @if($photo)
 
-                                                <a href="#" data-slide-index="1" class="b-detail__main-info-images-small-one">
-                                                    <img class="img-responsive" src="{{$photo->path}}" alt="{{$photo->alt}}" />
-                                                </a>
+                                                    <a href="#" data-slide-index="1"
+                                                       class="b-detail__main-info-images-small-one">
+                                                        <img class="img-responsive" src="{{$photo->path}}"
+                                                             alt="{{$photo->alt}}"/>
+                                                    </a>
                                                 @endif
                                             @endforeach
                                         </div>
@@ -127,7 +136,8 @@
                             </div>
                             <div class="b-detail__main-info-text wow zoomInUp" data-wow-delay="0.5s">
                                 <div class="b-detail__main-aside-about-form-links">
-                                    <a href="#" class="j-tab m-active s-lineDownCenter" data-to='#info1'>GENERAL INQUIRY</a>
+                                    <a href="#" class="j-tab m-active s-lineDownCenter" data-to='#info1'>GENERAL
+                                        INQUIRY</a>
                                 </div>
                                 <div id="info1">
                                     <p>{{$good->description}}</p>
@@ -135,7 +145,15 @@
                                 </div>
                             </div>
                             <div class="b-detail__main-info-extra wow zoomInUp" data-wow-delay="0.5s">
+
                                 <h2 class="s-titleDet">Комментарии</h2>
+                                @if ($flash = session('message'))
+
+                                    <div class="alert alert-success">
+                                        <p>{{$flash}}</p>
+                                    </div>
+
+                                @endif
                                 <div class="row">
                                     <div class="col-xs-12">
                                         @foreach($good->comments as $comment)
@@ -147,9 +165,12 @@
                                             {{ csrf_field() }}
                                             <div class="form-group">
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                                    <input id="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="text" placeholder="" required="required" type="text">
+                                                    <input id="text" class="form-control col-md-7 col-xs-12"
+                                                           data-validate-length-range="6" data-validate-words="2"
+                                                           name="text" placeholder="" required="required" type="text">
                                                 </div>
-                                                <button type="submit" class="btn m-btn">Высказаться<span class="fa fa-angle-right"></span></button>
+                                                <button type="submit" class="btn m-btn">Высказаться<span
+                                                            class="fa fa-angle-right"></span></button>
                                             </div>
                                         </form>
                                     </div>
@@ -172,13 +193,13 @@
 
                                 <h2 class="s-titleDet">Shops</h2>
                                 @if($good->shops)
-                                @foreach($good->shops as $shop)
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <h4 class="b-detail__main-aside-desc-title">{{$shop->address}}</h4>
+                                    @foreach($good->shops as $shop)
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <h4 class="b-detail__main-aside-desc-title">{{$shop->address}}</h4>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
                                 @endif
                             </div>
                             <div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
@@ -189,29 +210,28 @@
                                     <p>Call the seller 24/7 and they would help you.</p>
                                 </div>
                                 <div class="b-detail__main-aside-about-seller">
-                                    <p>Seller Info: <span>NissanCarDealer</span></p>
+                                    <p>Seller Info: <span>{{$good->name}} Dealer</span></p>
                                 </div>
                                 <div class="b-detail__main-aside-about-form">
                                     <div class="b-detail__main-aside-about-form-links">
-                                        <a href="#" class="j-tab m-active s-lineDownCenter" data-to='#form1'>GENERAL INQUIRY</a>
-                                        <a href="#" class="j-tab" data-to='#form2'>SCHEDULE TEST DRIVE</a>
+
+                                        <a href="#" class="j-tab m-active s-lineDownCenter" data-to='#form1'>SCHEDULE
+                                            TEST DRIVE</a>
                                     </div>
-                                    <form id="form1" action="/" method="post">
-                                        <input type="text" placeholder="YOUR NAME" value="" name="name" />
-                                        <input type="email" placeholder="EMAIL ADDRESS" value="" name="email" />
-                                        <input type="tel" placeholder="PHONE NO." value="" name="name" />
+                                    <form id="form1" action="{{route ('test.drive')}}" method="post">
+                                        {{ csrf_field() }}
+                                        <input type="text" placeholder="YOUR NAME" value="" name="name"/>
                                         <textarea name="text" placeholder="message"></textarea>
-                                        <div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-                                        <div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
-                                        <button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
+                                        <button type="submit" class="btn m-btn">ЗАПИСАТЬСЯ<span
+                                                    class="fa fa-angle-right"></span></button>
                                     </form>
-                                    <form id="form2" action="/" method="post">
-                                        <input type="text" placeholder="YOUR NAME" value="" name="name" />
-                                        <textarea name="text" placeholder="message"></textarea>
-                                        <div><input type="checkbox" name="one" value="" /><label>Send me a copy of this message</label></div>
-                                        <div><input type="checkbox" name="two" value="" /><label>Send me a copy of this message</label></div>
-                                        <button type="submit" class="btn m-btn">SEND MESSAGE<span class="fa fa-angle-right"></span></button>
-                                    </form>
+                                    @if ($flash = session('driver'))
+
+                                        <div class="alert alert-success">
+                                            <p>Уважаемый, {{$flash}}, Вы успешно записаны на тест-драйв!</p>
+                                        </div>
+
+                                    @endif
                                 </div>
                             </div>
                         </aside>

@@ -137,4 +137,14 @@ class GoodsController extends Controller
 
     }
 
+    public function testDrive(Request $request)
+    {
+
+        if($request->input('name')) :
+            session()->flash('driver', $request->input('name'));
+        endif;
+
+        return back();
+    }
+
 }

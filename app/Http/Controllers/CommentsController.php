@@ -46,6 +46,7 @@ class CommentsController extends Controller
         $user = \Auth::user();
 
         \Mail::to($user)->send(new Mail($user));
+        session() -> flash('message', 'Комментарий добавлен');
         return back();
     }
 

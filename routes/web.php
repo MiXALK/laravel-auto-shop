@@ -16,6 +16,7 @@ Route::get('/goods/{id}', 'GoodController@show')->name('auto.show');
 
 Route::get('/order', 'OrdersController@create');
 Route::post('/order', 'OrdersController@store');
+Route::post('/test_drive', 'Admin\GoodsController@testDrive')->name('test.drive');
 
 Auth::routes();
 
@@ -26,7 +27,7 @@ Route::get('/photos/($id)', 'PhotoController@view')->name('photo.view');
 Route::get('/category/{slug}', 'CategoryController@category');
 
 
-Route::prefix('admin')->middleware(['auth'])->group(function(){
+Route::prefix('admin')->middleware(['auth', 'checkAdmin'])->group(function(){
 
     Route::prefix('goods')->group(function (){
         Route::get('/', 'Admin\GoodsController@index')->name('goods.index');

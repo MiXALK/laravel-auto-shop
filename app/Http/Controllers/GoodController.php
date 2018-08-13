@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
+use App\Cart;
 
 
 class GoodController extends Controller
@@ -16,29 +17,6 @@ class GoodController extends Controller
      */
     public function index()
     {
-        //        $goods = DB::table('goods')
-//            ->where('id', '>', 1)->get();
-////            ->where('id', '=')
-//        $goods = Good::all();
-//        dd ($goods);        $goods = Goods::all();
-
-        //SAVE
-//        $goodsObj = new Good();
-//        $goodsObj ->name = 'Sony';
-//        $goodsObj ->short_description = 'Description short';
-//        $goodsObj ->description = 'Description';
-//        $goodsObj ->icon = 'icon ref';
-//        $goodsObj-> save();
-
-        //$goods
-
-//        $goods = Good::all();
-//        dd ($goods);
-//        return $goods;
-
-//        $routes = collect (\Route::getRoutes())->map(function($route){
-//            return $route->uri();
-//        });
 
         $goods = Goods::all();
         return view('goods.index', [
@@ -47,45 +25,21 @@ class GoodController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Collect goods to cart
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //        dd($request->all());
-//        $this->validate($request, [
-//            'name' => 'required',
-//            'short_description' => 'required',
-//            'description' => 'required',
-//            'icon' => 'required',
-//        ]);
-//        $goodsObj = new Goods();
-//        $goodsObj ->name = $request->name;
-//        $goodsObj ->short_description = $request->short_description;
-//        $goodsObj ->description = $request->description;
-//        $goodsObj ->icon = $request->icon;
-//        $goodsObj-> save();
-
-//        Goods::create([
-//        'name' => $request->name,
-//        'short_description' => $request->short_description,
-//        'description' => $request->description,
-//        'icon' => $request->icon,
-//            ]);
-//        Good::create($request->all());
-//        return redirect('/goods');
+    public function addToCart(Request $request, $id) {
+        $product = Goods::find($id);
+        $oldCart = session()->has('cart') ? session()->get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+//        dd($cart);
+        $request->session()->put('cart', $cart);
+        return redirect()->route('auto');
     }
 
     /**

@@ -16,8 +16,7 @@
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <div class="b-detail__head-price">
-                            <div class="b-detail__head-price-num">$44,380</div>
-                            <p>Included Taxes &amp; Checkup</p>
+                            <div class="b-detail__head-price-num">${{$good->price}}</div>
                         </div>
                     </div>
                 </div>
@@ -181,6 +180,9 @@
                     <div class="col-md-4 col-xs-12">
                         <aside class="b-detail__main-aside">
                             <div class="b-detail__main-aside-desc wow zoomInUp" data-wow-delay="0.5s">
+                                <div>
+                                    <a href="{{route('addToCart', ['id' => $good->id]) }}" class="b-detail__head-price-num" role="button">Добавить в корзину</a>
+                                </div>
                                 <h2 class="s-titleDet">Description</h2>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -203,12 +205,6 @@
                                 @endif
                             </div>
                             <div class="b-detail__main-aside-about wow zoomInUp" data-wow-delay="0.5s">
-                                <h2 class="s-titleDet">INQUIRE ABOUT THIS VEHICLE</h2>
-                                <div class="b-detail__main-aside-about-call">
-                                    <span class="fa fa-phone"></span>
-                                    <div>1-888-378-4027</div>
-                                    <p>Call the seller 24/7 and they would help you.</p>
-                                </div>
                                 <div class="b-detail__main-aside-about-seller">
                                     <p>Seller Info: <span>{{$good->name}} Dealer</span></p>
                                 </div>

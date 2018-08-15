@@ -14,6 +14,8 @@
 Route::get('/', 'GoodController@index')->name('auto');
 Route::get('/goods/{id}', 'GoodController@show')->name('auto.show');
 Route::get('/add_to_cart/{id}', 'GoodController@addToCart')->name('addToCart');
+Route::get('/cart', 'GoodController@getCart')->name('сart');
+
 
 Route::get('/order', 'OrdersController@create');
 Route::post('/order', 'OrdersController@store');

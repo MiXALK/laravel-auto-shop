@@ -56,15 +56,16 @@ class GoodController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function getCart() {
+        if (!session()->has('cart')) {
+            return view('shop.shopping-cart');
+        }
+        $oldCart = session()->get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', [
+            'products' => $cart->items,
+            'totalPrice' => $cart->totalPrice
+        ]);
     }
 
     /**

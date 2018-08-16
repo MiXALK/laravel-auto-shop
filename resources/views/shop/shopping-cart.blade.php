@@ -15,7 +15,8 @@
                     <div class="b-submit__main">
                         @if(session()->has('cart'))
 
-                            <form action="/" method="post" class='s-submit'>
+                            <form action="{{ route('save.order') }}" method="post" class='s-submit'>
+                                {{ csrf_field() }}
                                 <div class="b-submit__main-plan wow zoomInUp" data-wow-delay="0.3s">
                                     <header class="s-headerSubmit s-lineDownLeft">
                                         <h2>Список Ваших заказов</h2>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Admin\Goods;
 use App\Cart;
+use App\Order;
+use Illuminate\Support\Facades\Auth;
 
 
 class GoodController extends Controller
@@ -37,7 +39,6 @@ class GoodController extends Controller
         $oldCart = session()->has('cart') ? session()->get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
-//        dd($cart);
         $request->session()->put('cart', $cart);
         return redirect()->route('auto');
     }
@@ -56,39 +57,6 @@ class GoodController extends Controller
         ]);
     }
 
-    public function getCart() {
-        if (!session()->has('cart')) {
-            return view('shop.shopping-cart');
-        }
-        $oldCart = session()->get('cart');
-        $cart = new Cart($oldCart);
-        return view('shop.shopping-cart', [
-            'products' => $cart->items,
-            'totalPrice' => $cart->totalPrice
-        ]);
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
 }

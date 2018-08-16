@@ -14,21 +14,18 @@
 Route::get('/', 'GoodController@index')->name('auto');
 Route::get('/goods/{id}', 'GoodController@show')->name('auto.show');
 Route::get('/add_to_cart/{id}', 'GoodController@addToCart')->name('addToCart');
-Route::get('/cart', 'GoodController@getCart')->name('сart');
 
+Route::get('/order', 'OrdersController@getCart')->name('order');
+Route::post('/order', 'OrdersController@store')->middleware(['auth', 'checkAdmin'])->name('save.order');
 
-Route::get('/order', 'OrdersController@create');
-Route::post('/order', 'OrdersController@store');
 Route::post('/test_drive', 'Admin\GoodsController@testDrive')->name('test.drive');
 
 Auth::routes();
-
 
 Route::get('/contact', 'ContactController@index');
 Route::get('/photos', 'PhotoController@index')->name('photo');
 Route::get('/photos/($id)', 'PhotoController@view')->name('photo.view');
 Route::get('/category/{slug}', 'CategoryController@category');
-
 
 Route::prefix('admin')->middleware(['auth', 'checkAdmin'])->group(function(){
 

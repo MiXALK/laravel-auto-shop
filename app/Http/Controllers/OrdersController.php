@@ -4,38 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Cart;
+use App\Order;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-
-        $email = '';
-
-        if(\Auth::user() !== null){
-            $email = \Auth::user()->email;
+    public function getCart() {
+        if (!session()->has('cart')) {
+            return view('shop.shopping-cart');
         }
-
-        return view('goods.order',
-            [
-                'email' => $email,
-            ]
-        );
+        $oldCart = session()->get('cart');
+        $cart = new Cart($oldCart);
+        return view('shop.shopping-cart', [
+            'products' => $cart->items,
+            'totalPrice' => $cart->totalPrice
+        ]);
     }
 
     /**
@@ -44,53 +32,30 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        if (!session()->has('cart')) {
+            return redirect()->route('auto');
+        }
+        $oldCart = session()->get('cart');
+        $cart = new Cart($oldCart);
+        try {
+
+            $order = new Order();
+            $order->cart = serialize($cart);
+            if(Auth::user() !== null){
+                $order->name= Auth::user()->name;
+                $order->user_id = Auth::user()->id;
+
+                Auth::user()->orders()->save($order);
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->route('auto')->with('error', $e->getMessage());
+        }
+
+        session()->forget('cart');
+        return redirect()->route('auto')->with('success', 'Заказ успешно сохранён!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

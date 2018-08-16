@@ -55,7 +55,7 @@
 
 
                         <ul>
-                            <li><a href="{{ route('сart') }}">{{ __('Корзина') }}&nbsp;
+                            <li><a href="{{ route('order') }}">{{ __('Корзина') }}&nbsp;
                                     <span class="badge">{{ session()->has('cart') ? session()->get('cart')->totalQty : '' }}</span>
                                 </a>
                             </li>
